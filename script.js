@@ -3,6 +3,7 @@
 // ==================
 db =
 [
+    'thumbnail',
     'product',
     'description',
     'price',
@@ -26,6 +27,14 @@ function createOrUpdateItem(id=null)
             for (i = 0; i < 5; i++)
             {
                 switch (db[i]) {
+                    case 'thumbnail':
+                        requestFormInnerHtml += "<label for='" + db[i] + "'>Thumbnail URL:</label><br>";
+
+                        value = id == null ? '' : JSON.parse(localStorage.getItem(id))[db[i]];
+
+                        requestFormInnerHtml += "<input type='url' placeholder='https://site.com/image.jpg' required id='" + db[i] + "' value='" + value + "'><br>";
+
+                        break;
                     case 'product':
                         requestFormInnerHtml += "<label for='" + db[i] + "'>" + db[i].charAt(0).toUpperCase() + db[i].slice(1) + ":</label><br>";
 
@@ -80,6 +89,8 @@ function createOrUpdateItem(id=null)
     
         for (i = 0; i < db.length; i++)
         {
+            value = '';
+
             if (db[i] != 'operation')
             {
                 if (db[i] == 'price') {
@@ -93,7 +104,7 @@ function createOrUpdateItem(id=null)
 
             if (value == '' && db[i] != 'operation')
             {
-                if (confirm('Sorry, we can\'t have empty values! Do you want to clear the form?')) document.getElementById('form').innerHTML = '';
+                if (confirm('Sorry, we can\'t have empty or wrong values! Do you want to clear the form?')) document.getElementById('form').innerHTML = '';
                 document.getElementById('create').value = 'Create';
                 document.getElementById('form').hidden = true;
 
@@ -123,7 +134,7 @@ function readItem(itemId=null)
     {
         for (i=0; i<localStorage.length; i++)
         {
-            console.log(JSON.parse(localStorage.getItem(i)));
+            //console.log(JSON.parse(localStorage.getItem(i)));
         }
     }
     else if (itemId != null)
@@ -229,17 +240,33 @@ function refreshTable()
 
             if(db[j] != 'operation')
             {
-                if (deleted)
+                if (db[j] == 'thumbnail')
                 {
-                    tableHtmlAux += db[j] != 'price' ? "<td class='deletedItem'>" : "<td class='deletedItem dollar'>";
+                    tableHtmlAux += "<td class='thumbnail'>";
                 } else
                 {
-                    tableHtmlAux += db[j] != 'price' ? "<td>" : "<td class='dollar'>";
+                    if (deleted)
+                    {
+                        tableHtmlAux += db[j] != 'price' ? "<td class='deletedItem'>" : "<td class='deletedItem dollar'>";
+                    } else
+                    {
+                        tableHtmlAux += db[j] != 'price' ? "<td>" : "<td class='dollar'>";
                 }
+            }
 
                 value = JSON.parse(localStorage.getItem(i))[db[j]];
             
-                tableHtmlAux += (value != undefined ? JSON.parse(localStorage.getItem(i))[db[j]] : '');
+                if (db[j] != 'thumbnail')
+                {
+                    tableHtmlAux += (value != undefined ? JSON.parse(localStorage.getItem(i))[db[j]] : '');
+                }
+                else
+                {
+                    tableHtmlAux += "<img src='";
+                    tableHtmlAux += (value != undefined ? JSON.parse(localStorage.getItem(i))[db[j]] : '');
+                    tableHtmlAux += "' width='100vw' height='100vh'>";
+                }
+                
             }
             else
             {

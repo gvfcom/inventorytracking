@@ -40,3 +40,12 @@ input[type=button]:hover {
 input:invalid {
     background-color: rgb(251, 253, 126);
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td {
+    vertical-align: middle;
+}
