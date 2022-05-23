@@ -1,0 +1,42 @@
+:root {
+    --button-bg-color: #818181;
+    --button-bg-color-hover: #9b9b9b;
+    --button-border: 1px solid #515151;
+}
+
+body {
+    margin: 5px;
+    padding: 0px;
+}
+
+.deletedItem {
+    background-color: rgba(200, 0, 0);
+    color: white;
+    text-decoration: line-through;
+}
+
+input[type=button] {
+    margin: -5px;
+    border-radius: 20px;
+    margin: 0px;
+    background-color: var(--button-bg-color);
+    border: var(--button-border);
+    color: #fff;
+    border: 0;
+    padding: 1rem 1rem;
+    line-height: 1;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+input[type=button]:hover {
+    background-color: var(--button-bg-color-hover);
+}
+
+.dollar::before {
+    content: '$';
+}
+
+input:invalid {
+    background-color: rgb(251, 253, 126);
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Inventory Tracking</title>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<script src="script.js"></script>
+	</head>
+	<body>
+		<h1>Inventory Tracking</h1>
+		<div id="form" hidden></div>
+		<div>
+			<input type="button" id="create" value="Create" onclick="createOrUpdateItem();">
+			<input type="button" value="Delete All" onclick="deleteAll();">
+		</div>
+		<div id="table">
+			<script>refreshTable();</script>
+		</div>
+	</body>
+</html>
